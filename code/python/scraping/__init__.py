@@ -1,23 +1,30 @@
 """
-Web scraping utilities for NLWeb.
+NLWeb Scraping Module
 
-This module provides functionality for:
-- Extracting URLs from sitemaps
-- Crawling websites with exponential backoff
-- Extracting schema markup from HTML
-- Loading extracted data into vector database
+This module provides tools for web content extraction and processing, including:
+- URL extraction from sitemaps
+- Web page crawling and HTML extraction
+- Schema.org markup extraction
+- PDF text extraction and chunking
+- Content processing for vector databases
 
-Main scripts:
-- markupFromSite.py: Extract markup and optionally generate embeddings
-  Usage: python -m code.scraping.markupFromSite <domain>
-  
-- crawlAndLoadSite.py: Complete pipeline from crawl to database
-  Usage: python -m code.scraping.crawlAndLoadSite <domain>
+Main Components:
+- urlsFromSitemap: Extract URLs from XML sitemaps
+- expBackOffCrawl: Robust web crawling with retry logic
+- extractMarkup: Extract structured data from HTML
+- pdf_extractor: Extract and chunk text from PDF files
 """
 
 from .urlsFromSitemap import extract_urls_from_sitemap, process_site_or_sitemap, get_sitemaps_from_robots
 from .expBackOffCrawl import SimpleCrawler
 from .extractMarkup import process_directory, extract_schema_markup, extract_canonical_url
+
+# PDF text extraction and chunking
+from .pdf_extractor import (
+    PDFTextExtractor,
+    TextChunk,
+    PDFStructure
+)
 
 __all__ = [
     'extract_urls_from_sitemap',
@@ -26,5 +33,9 @@ __all__ = [
     'SimpleCrawler',
     'process_directory',
     'extract_schema_markup',
-    'extract_canonical_url'
+    'extract_canonical_url',
+    # PDF extraction classes and functions
+    'PDFTextExtractor',
+    'TextChunk',
+    'PDFStructure'
 ]
